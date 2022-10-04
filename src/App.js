@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Home from "./Pages/home";
@@ -6,9 +6,6 @@ import Cart from "./Pages/cart";
 import Thankyou from "./components/thankyou";
 
 const App = () => {
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify([]));
-  }, []);
   return (
     <div>
       <Router>

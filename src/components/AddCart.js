@@ -4,29 +4,30 @@ import { useNavigate } from "react-router-dom";
 import "./addcart.css";
 import Cartitem from "./Cartitem";
 
-const AddCart = ({ cartArray, setCartArray }) => {
+const AddCart = ({ cartArray, setCartArray, cart }) => {
   const [totalAmount, setTotalAmount] = useState(0);
- 
-  const navigate=useNavigate();
+
+  const navigate = useNavigate();
   const removeFromCart = (id) => {
     const filterCart = cartArray.filter((item) => item.id !== id);
     localStorage.setItem("cart", JSON.stringify(filterCart));
     setCartArray([...filterCart]);
     let amount = 0;
     for (const item of filterCart) {
-      amount += item.price;
+      amount += parseInt(item.price);
     }
     setTotalAmount(amount);
   };
-  const onClick=()=>{
-    navigate("/thankYou")
-  }
+
+  const onClick = () => {
+    navigate("/thankYou");
+  };
 
   useEffect(() => {
     if (cartArray && cartArray.length > 0) {
       let amount = 0;
       for (const item of cartArray) {
-        amount += item.price*item.quantity;
+        amount += parseInt(item.price) * parseInt(item.quantity);
       }
       setTotalAmount(amount);
     }
@@ -34,15 +35,19 @@ const AddCart = ({ cartArray, setCartArray }) => {
   }, []);
   return (
     <>
-   
       <section className="main-cart-section">
         <div className="">
           <div className="cart-items-container">
             <Scrollbars>
               {cartArray &&
                 cartArray.map((cartItem) => (
-                  <Cartitem cartItem={cartItem}  removeFromCart={removeFromCart} setCart ={setTotalAmount} totalAmount={totalAmount}/>
-                  
+                  <Cartitem
+                    cart={cart}
+                    cartItem={cartItem}
+                    removeFromCart={removeFromCart}
+                    setCart={setTotalAmount}
+                    totalAmount={totalAmount}
+                  />
                 ))}
               <hr></hr>
             </Scrollbars>

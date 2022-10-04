@@ -21,35 +21,16 @@
   justify-content: center;
   /* flex-direction: column; */
   display: grid;
-  grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr .1fr;
+  grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   margin-top: 49px;
   background-color:whitesmoke;
-  margin-left: auto;
+  /* margin-left: auto; */
   scroll-margin-block: 2px;
   
   
 }
-.containers .Image{
-  margin-left: 60px;
-  border-radius: black 4rem;
-}
-.containers .Name{
-  margin-left: 33px;
-}
-.containers .Size{
-  margin-left: -30px;
-}
-.containers .Category{
-  margin-left: -50px;
-}
-.containers .Price{
-  margin-left: -75px;
-}
-.containers .Stock{
-  margin-left: -100px;
-}
-.containers .Buy{
-  margin-left: -90px;
+.Homeheader .Stock{
+  margin-right: 10px;
 }
 body {
   width: 80%;

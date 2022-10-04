@@ -1,38 +1,35 @@
 import React, { useState } from "react";
 import "./cart.css";
 
-const Items = ({ curItem, handleCart }) => {
-  const [checked, setChecked] = useState(false);
-  const [quantity, setQuantity] = useState(1)
-  const handleChange=(e)=>{
-    if(e.target.value<0){
+const Items = ({ curItem, handleCart, exists }) => {
+  const [checked, setChecked] = useState(exists ? true : false);
+  const [quantity, setQuantity] = useState(exists ? exists.quantity : 1);
+  const handleChange = (e) => {
+    if (e.target.value < 0) {
       alert("Quantity cannot ne negative");
-      return
-
+      return;
     }
-    const cart = JSON.parse(localStorage.getItem("cart"))
-    if(cart){
-      let index =-1
-      for(let i=0;i<cart.length;i++){
-        if(cart[i].id===curItem.id){
-          index =i;
-          break
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    if (cart) {
+      let index = -1;
+      for (let i = 0; i < cart.length; i++) {
+        if (cart[i].id === curItem.id) {
+          index = i;
+          break;
         }
       }
-     if(index !==-1){
-      cart[index]={...cart[index],quantity:e.target.value}
-      localStorage.setItem(
-          "cart",JSON.stringify(cart)
-      )
-     }
+      if (index !== -1) {
+        cart[index] = { ...cart[index], quantity: e.target.value };
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
     }
     setQuantity(e.target.value);
-  }
+  };
 
   const handleCheck = () => {
     setChecked(!checked);
-    
-    handleCart({...curItem,quantity}, !checked ? "add" : "remove");
+
+    handleCart({ ...curItem, quantity }, !checked ? "add" : "remove");
   };
   return (
     <>
@@ -57,20 +54,25 @@ const Items = ({ curItem, handleCart }) => {
           <h4>{curItem.price}</h4>
         </div>
         <div className="instock">
-        <h4>{curItem.instock}</h4>
-
+          <h4>{curItem.instock}</h4>
         </div>
         <div className="total_quantity">
-        <label htmlFor="quantity"/>
-        <input type="text"  id="quantity" name="quantity" value={quantity} onChange={handleChange} required />
+          <label htmlFor="quantity" />
+          <input
+            type="text"
+            id="quantity"
+            name="quantity"
+            value={quantity}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className="Cartbutton">
           <span
             class="fas fa-cart-plus"
             // type="submit"
             // onClick={() => handleCart(curItem, "add")}
-          >
-          </span>
+          ></span>
         </div>
         <div className="CheckBox">
           <input checked={checked} type="checkbox" onClick={handleCheck} />

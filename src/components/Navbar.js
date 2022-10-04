@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Homeheader from "./Homeheader";
+import "./cart.css";
+
 
 const Navbar = ({ items, setItems, products }) => {
   const navigate = useNavigate();
